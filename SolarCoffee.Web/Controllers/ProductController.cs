@@ -16,12 +16,14 @@ namespace SolarCoffee.Web.Controllers
             _productService = productService;
         }
 
-        [HttpGet("/api/product")]
+        [HttpGet("/api/products")]
         public ActionResult GetProduct()
         {
             _logger.LogInformation("Getting all products");
-            _productService.GetAllProducts();
-            return Ok("");
+            var products = _productService.GetAllProducts();
+            return Ok(products);
         }
+
+
     }
 }
