@@ -1,0 +1,2 @@
+dotnet ef --startup-project ../SolarCoffee.Web database update
+dotnet ef --startup-project ../SolarCoffee.Web migrations add InitialMigration
