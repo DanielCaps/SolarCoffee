@@ -29,7 +29,5 @@ namespace SolarCoffee.Web.Controllers
 
             return Ok(productViewModels);
         }
-
-
     }
 }
