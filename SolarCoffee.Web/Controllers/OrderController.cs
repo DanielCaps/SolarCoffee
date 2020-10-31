@@ -18,7 +18,7 @@ namespace SolarCoffee.Web.Controllers
         {
             _logger = logger;
             _orderService = orderService;
-            customerService = _customerService;
+            _customerService = customerService;
         }
 
         [HttpPost("/api/invoice")]

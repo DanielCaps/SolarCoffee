@@ -66,10 +66,14 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { IProduct, IProductInventory } from "../types/Product";
+import { IShipment } from '../types/Shipment';
+import { InventoryService } from '../services/inventory-service';
 import SolarButton from "@/components/SolarButton.vue";
 import NewProductModal from "@/components/modals/NewProductModal.vue";
 import ShipmentModal from "@/components/modals/ShipmentModal.vue";
-import { IShipment } from '../types/Shipment';
+
+
+const inventoryService = new InventoryService();
 
 @Component({
     name: 'Inventory',
@@ -81,39 +85,7 @@ export default class Inventory extends Vue {
     isShipmentVisible: boolean= false;
 
     
-    inventory: IProductInventory[] = [
-
-        {
-            id:1,
-            product: { 
-                id: 1, 
-                name: 'Some product', 
-                description: 'Good Stuff', 
-                price: 100, 
-                createdOn: new Date(), 
-                updatedOn: new Date(),
-                isTaxable: false,
-                isArchived: false,
-            },
-            idealQuantity: 100,
-            quantityOnHand: 100,
-        },
-        {
-            id:2,
-            product: { 
-                id: 2, 
-                name: 'Another product', 
-                description: 'Good Stuff', 
-                price: 100, 
-                createdOn: new Date(), 
-                updatedOn: new Date(),
-                isTaxable: true,
-                isArchived: false,
-            },
-            idealQuantity: 20,
-            quantityOnHand: 40,
-        }
-    ];
+    inventory: IProductInventory[] = [];
 
     closeModals(){
         this.isShipmentVisible = false;
@@ -134,9 +106,17 @@ export default class Inventory extends Vue {
 
     }
 
-    saveNewShipment(shipment: IShipment){
-        console.log('saveNewShipment');
-        console.log(shipment);
+    async saveNewShipment(shipment: IShipment){
+        await inventoryService.updateInventoryQuantity(shipment);
+        this.isShipmentVisible = false;
+        await this.initialize();
+    }
+    async initialize(){
+        this.inventory = await inventoryService.getInventory()
+    }
+
+    async created(){
+        await this.initialize();
     }
     
 }
