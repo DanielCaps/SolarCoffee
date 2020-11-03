@@ -3,6 +3,7 @@
         <button
             @click="onClick" 
             :class="['solar-button', {'full-width': isFullWidth }]"
+            :disabled="disabled"
             type="button"
             >
             <slot></slot>
@@ -24,6 +25,9 @@
         @Prop({required: false, type: Boolean, default: false})
         isFullWidth!: boolean;
 
+        @Prop({required: false, type: Boolean, default: false})
+        disabled?: boolean;
+
         onClick(){
             this.$emit('button:click')
         }
@@ -43,7 +47,6 @@
         font-size: 1rem;
         min-width: 100px;
         border: none;
-        border-bottom: 2px solid darken($solar-blue, 20%);
         border-radius: 3px;
 
         &:hover{
