@@ -24,13 +24,13 @@
                 <td>
                     {{getTotal(order) | price }}
                 </td>
-                <td :class="{green: order.IsPaid}">
+                <td :class="{ green : order.IsPaid }">
                     {{ getStatus(order.isPaid) }}
                 </td>
                 <td>
                     <div 
                     v-if="!order.isPaid"
-                    class="lni lni-checkmark-circle order-complete"
+                    class="lni lni-checkmark-circle green order-complete"
                     @click="markComplete(order.id)"
                     >
 
@@ -83,6 +83,14 @@ export default class Orders extends Vue {
 <style scoped lang="scss">
 @import "@/scss/global.scss";
 
+.green{
+    font-weight: bold;
+    color: $solar-green;
+}
 
+.order-complete{
+    cursor: pointer;
+    text-align: center;
+}
 
 </style>

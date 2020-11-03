@@ -4,6 +4,7 @@
         <h1 id="customersTitle">
             Manage Customers
         </h1>
+        <hr>
         <div class="customer-actions">
             <solar-button @button:click="showNewCustomerModal">
                 Add Customer
