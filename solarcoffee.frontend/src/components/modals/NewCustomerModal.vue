@@ -73,7 +73,18 @@ import { ICustomer } from '../../types/Customer';
 
 export default class NewCustomerModal extends Vue{
     customer: ICustomer = {
-        primaryAddress: {},
+        id:0,
+        primaryAddress: {
+            createdOn: new Date(), 
+            updatedOn: new Date(), 
+            id:0, 
+            addressLine1: "", 
+            addressLine2: "", 
+            city: "", 
+            country: "", 
+            state: "", 
+            postalCode: ""
+        },
         createdOn: new Date(),
         updatedOn: new Date(),
         firstName: "",

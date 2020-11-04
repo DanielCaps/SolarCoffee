@@ -4,6 +4,9 @@
             Inventory Dashboard
         </h1>
         <hr>
+
+        <inventory-chart />
+
         <div class="inventory-actions">
             <solar-button @button:click="showNewProductModal" id="addNewBtn">
                 Add New Item
@@ -71,6 +74,7 @@ import { ProductService } from '../services/product-service';
 import SolarButton from "@/components/SolarButton.vue";
 import NewProductModal from "@/components/modals/NewProductModal.vue";
 import ShipmentModal from "@/components/modals/ShipmentModal.vue";
+import InventoryChart from "@/components/charts/InventoryChart.vue";
 
 
 const inventoryService = new InventoryService();
@@ -78,7 +82,7 @@ const productService = new ProductService();
 
 @Component({
     name: 'Inventory',
-    components: { SolarButton, NewProductModal, ShipmentModal }
+    components: { SolarButton, NewProductModal, ShipmentModal, InventoryChart }
 })
 
 export default class Inventory extends Vue {
@@ -128,7 +132,8 @@ export default class Inventory extends Vue {
         await this.initialize();
     }
     async initialize(){
-        this.inventory = await inventoryService.getInventory()
+        this.inventory = await inventoryService.getInventory();
+        await this.$store.dispatch("assignSnapshots")
     }
 
     async created(){

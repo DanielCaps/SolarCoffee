@@ -230,7 +230,7 @@ export default class CreateInvoice extends Vue {
 
         html2canvas(invoice).then(canvas => {
             let image = canvas.toDataURL('image/png');
-            pdf.addImage(image, 'PNG', 0, 0, width * 0.45, height * 0.55);
+            pdf.addImage(image, 'PNG', 0, 0, width * 0.55, height * 0.55);
             pdf.save('invoice');
         })
     }
