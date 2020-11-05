@@ -1,6 +1,6 @@
 <template>
     <div class="inventory-container">
-        <h1 class="inventoryTitle">
+        <h1 id="inventoryTitle">
             Inventory Dashboard
         </h1>
         <hr>
