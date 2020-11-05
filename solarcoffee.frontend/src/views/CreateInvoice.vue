@@ -228,7 +228,7 @@ export default class CreateInvoice extends Vue {
         let width = this.$refs.invoice.clientWidth;
         let height = this.$refs.invoice.clientHeight;
 
-        html2canvas(invoice).then(canvas => {
+        html2canvas(invoice!).then(canvas => {
             let image = canvas.toDataURL('image/png');
             pdf.addImage(image, 'PNG', 0, 0, width * 0.55, height * 0.55);
             pdf.save('invoice');
@@ -242,16 +242,16 @@ export default class CreateInvoice extends Vue {
         };
 
         let existingItems = this.lineItems
-            .map(item => item.product.id);
+            .map(item => item!.product.id);
 
         if(existingItems.includes(newItem.product.id)){
             let lineItem = this.lineItems.find(
-                item => item.product.id === newItem.product.id
+                item => item!.product.id === newItem.product.id
             );
             
             let currentQuantity = Number(lineItem.quantity);
             let updatedQuandtity = currentQuantity += newItem.quantity;
-            lineItem.quantity = updatedQuandtity;
+            lineItem!.quantity = updatedQuandtity;
         }
         else{
             this.lineItems.push(this.newItem);
@@ -298,9 +298,6 @@ export default class CreateInvoice extends Vue {
 <style scoped lang="scss">
 @import "@/scss/global.scss";
 
-.invoice-step{
-    
-}
 .invoice-steps-actions{
     display: flex;
     width: 100%;
