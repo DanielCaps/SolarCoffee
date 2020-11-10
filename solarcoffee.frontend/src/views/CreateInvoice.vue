@@ -172,6 +172,9 @@ const invoiceService = new InvoiceService();
     components: { SolarButton }
 })
 export default class CreateInvoice extends Vue {
+    $refs!:{
+        invoice:HTMLElement
+    }
     invoiceStep = 1;
     invoice: IInvoice = {
         createdOn: new Date,
@@ -242,11 +245,11 @@ export default class CreateInvoice extends Vue {
         };
 
         let existingItems = this.lineItems
-            .map(item => item!.product.id);
+            .map(item => item.product.id);
 
         if(existingItems.includes(newItem.product.id)){
             let lineItem = this.lineItems.find(
-                item => item!.product.id === newItem.product.id
+                item => item.product.id === newItem.product.id
             );
             
             let currentQuantity = Number(lineItem.quantity);

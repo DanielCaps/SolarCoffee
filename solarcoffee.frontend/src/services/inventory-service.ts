@@ -15,7 +15,8 @@ export class InventoryService{
     public async getInventory(): Promise<IProductInventory[]>{
         console.log('getInventory', this.API_URL)
         let result: IProductInventory[] =  await axios.get(`${this.API_URL}/inventory/`);
-        return result;
+        return result.data;
+        
     }
 
     public async updateInventoryQuantity(shipment: IShipment){
